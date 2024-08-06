@@ -30,7 +30,7 @@ CREATE TABLE chamados (
     prioridade ENUM('baixa', 'media', 'alta') NOT NULL,
     status ENUM('aberto', 'em_andamento', 'resolvido', 'fechado') DEFAULT 'aberto',
     data_abertura TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    data_fechamento TIMESTAMP,
+    data_fechamento date,
     tecnico_id INT,
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
     FOREIGN KEY (subcategoria_id) REFERENCES subcategorias(id),

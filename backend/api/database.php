@@ -9,7 +9,7 @@ class Database
     public function connect()
     {
         try {
-                $conn = new PDO(
+            $conn = new PDO(
                 "mysql:host=" . $this->server . ";dbname=" . $this->dbnome,
                 $this->user,
                 $this->pass
@@ -20,4 +20,18 @@ class Database
             echo "Database erro: " . $e->getMessage();
         }
     }
+
+    public function checkConnection()
+    {
+        $connection = $this->connect();
+        if ($connection) {
+            echo "Conexão com o banco de dados foi bem-sucedida!";
+        } else {
+            echo "Falha na conexão com o banco de dados.";
+        }
+    }
 }
+
+$db = new Database();
+$db->checkConnection();
+?>

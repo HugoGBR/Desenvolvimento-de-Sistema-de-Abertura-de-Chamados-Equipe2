@@ -45,22 +45,21 @@ function Navbar({ className }: { className?: string }) {
             <Menu setActive={setActive}>
                 <MenuItem setActive={setActive} active={active} item="Cadastros">
                     <div className="flex flex-col space-y-4 text-sm">
-                        <HoveredLink href="/web-dev">Usuarios</HoveredLink>
-                        <HoveredLink href="/interface-design">Categoria</HoveredLink>
-                        <HoveredLink href="/seo">Subcategorias</HoveredLink>
+                        <HoveredLink href="/routes/usuarios">Usuarios</HoveredLink>
+                        <HoveredLink href="/routes/categoria">Categoria</HoveredLink>
                     </div>
                 </MenuItem>
                 <MenuItem setActive={setActive} active={active} item="Chamados">
                     <div className="flex flex-col space-y-4 text-sm">
-                        <HoveredLink href="/web-dev">Em aberto</HoveredLink>
-                        <HoveredLink href="/interface-design">Resolvidos</HoveredLink>
-                        <HoveredLink href="/seo">Novo chamado</HoveredLink>
-                        <HoveredLink href="/seo">Fechado</HoveredLink>
+                        <HoveredLink href="/routes/aberto">Em aberto</HoveredLink>
+                        <HoveredLink href="/routes/resolvidos">Resolvidos</HoveredLink>
+                        <HoveredLink href="/routes/novoChamado">Novo chamado</HoveredLink>
+                        <HoveredLink href="/routes/fechado">Fechado</HoveredLink>
                     </div>
                 </MenuItem>
                 <MenuItem setActive={setActive} active={active} item="Resolver chamados">
                     <div className="flex flex-col space-y-4 text-sm">
-                        <HoveredLink href="/hobby">Lobby</HoveredLink>
+                        <HoveredLink href="/routes/resolver">Resolver</HoveredLink>
                     </div>
                 </MenuItem>
             </Menu>

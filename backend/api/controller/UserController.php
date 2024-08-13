@@ -19,53 +19,59 @@ class Usercontroller
         $users = $db->fetchAll(PDO::FETCH_ASSOC);
         return $users;
     }
-    public function getAllCargo()
-    {
-        $sql = "SELECT * FROM cargos";
-        $db = $this->conn->prepare($sql);
-        $db->execute();
-        $users = $db->fetchAll(PDO::FETCH_ASSOC);
-        return $users;
-    }
 
     public function CreateNewUser()
     {
-        $user = json_decode(file_get_contents("php//input"));
-        $sql = "INSERT INTO usuarios(nome,cargo_id,telefone,senha,email) VALUES (:nome,:cargo_id,:telefone,:senha,:email)";
+        $user = json_decode(file_get_contents("php://input"));
+    
+        if ($user === null) {
+            return ["Mensagem" => "Erro ao decodificar os dados JSON."];
+        }
+    
+        // Hash da senha
+        $hashedPassword = password_hash($user->senha, PASSWORD_BCRYPT);
+    
+        // Insira os dados no banco de dados
+        $sql = "INSERT INTO usuarios (nome, email, telefone, tipo, senha) VALUES (:nome, :email, :telefone, :tipo, :senha)";
         $db = $this->conn->prepare($sql);
         $db->bindParam(":nome", $user->nome);
-        $db->bindParam(":cargo_id", $user->cargo_id);
-        $db->bindParam(":telefone", $user->telefone);
-        $db->bindParam(":senha", $user->password_hash);
         $db->bindParam(":email", $user->email);
-        $db->execute();
-
+        $db->bindParam(":telefone", $user->telefone);
+        $db->bindParam(":tipo", $user->tipo);
+        $db->bindParam(":senha", $hashedPassword);
+    
         if ($db->execute()) {
-            $resposta = ["Mensagem" => "Usuario Cadastrado com Sucesso!"];
+            $resposta = ["Mensagem" => "Usuário Cadastrado com Sucesso!"];
+        } else {
+            $resposta = ["Mensagem" => "Erro ao cadastrar o usuário."];
         }
-
+    
         return $resposta;
     }
 
     public function validacaoLogin()
     {
         $user = json_decode(file_get_contents("php://input"));
-        $sql = "SELECT * FROM usuarios WHERE email = :email AND senha = :senha";
+    
+        if ($user === null) {
+            return ["Mensagem" => "Erro ao decodificar os dados JSON."];
+        }
+    
+        $sql = "SELECT * FROM usuarios WHERE email = :email";
         $db = $this->conn->prepare($sql);
         $db->bindParam(":email", $user->email);
-        $db->bindParam(":senha", $user->senha);
         $db->execute();
-        $users = $db->fetchAll(PDO::FETCH_ASSOC);
-
-
-        if ($users) {
-            $resposta = $users;
-        }else{
-            $resposta = 0;
+        $storedUser = $db->fetch(PDO::FETCH_ASSOC);
+    
+        if ($storedUser && password_verify($user->senha, $storedUser['senha'])) {
+            $resposta = $storedUser;
+        } else {
+            $resposta = ["Mensagem" => "Email ou senha inválidos."];
         }
-
+    
         return $resposta;
     }
+    
      
     public function getUserById(int $id)
     {
@@ -83,40 +89,6 @@ class Usercontroller
         }
     }
 
-    public function createNewUserGestao() {
-        try {
-            $user = json_decode(file_get_contents("php://input"));
-
-            if (!$user || !isset($user->nome) || !isset($user->cargo_id) || !isset($user->senha) || !isset($user->email) ) {
-                return json_encode(['status' => 0, 'message' => 'Dados incompletos.']);
-            }
-
-            $userExists = $this->checkUserExists($user->email);
-            if ($userExists) {
-                return json_encode(['status' => 0, 'message' => 'Usuário já existe.']);
-            }
-
-            $sql = "INSERT INTO usuarios (nome,cargo_id, senha, email) VALUES (:nome, :cargo_id, :senha, :email)";
-            $db = $this->conn->prepare($sql);
-
-            $db->bindParam(":nome", $user->nome);
-            $db->bindParam("cargo_id", $user->cargo_id);
-            $db->bindParam(":senha", $user->senha);
-            $db->bindParam(":email", $user->email);
-
-            if ($db->execute()) {
-                $resposta = 1;
-            } else {
-                $resposta = 0;
-            }
-
-            return json_encode($resposta);
-
-        } catch (\Exception $e) {
-            error_log('Erro ao criar usuário: ' . $e->getMessage());
-            return json_encode(['status' => 0, 'message' => 'Erro ao criar usuário.']);
-        }
-    }
 
     private function checkUserExists(string $email) {
         $query = "SELECT COUNT(*) FROM usuarios WHERE email = :email";
@@ -136,13 +108,15 @@ class Usercontroller
                 return json_encode(['status' => 0, 'message' => 'Usuário não encontrado.']);
             }
     
-            $sql = "UPDATE usuarios SET nome = :nome, cargo_id = :cargo_id, senha = :senha, email = :email WHERE id = :id";
+            $sql = "UPDATE usuarios SET nome = :nome, email = :email, telefone = :telefone, tipo = :tipo, senha = :senha WHERE id = :id";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':id', $id);
             $stmt->bindParam(':nome', $user->nome);
-            $stmt->bindParam(':cargo_id', $user->cargo_id);
-            $stmt->bindParam(':senha', $user->senha);
             $stmt->bindParam(':email', $user->email);
+            $stmt->bindParam(':telefone', $user->telefone);
+            $stmt->bindParam(':tipo', $user->tipo);
+            $stmt->bindParam(':senha', $user->senha);
+           
     
             if ($stmt->execute()) {
                 return json_encode(['status' => 1, 'message' => 'Registro atualizado com sucesso.']);

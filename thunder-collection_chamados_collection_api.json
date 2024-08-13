@@ -1,0 +1,102 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "chamados_collection_api",
+    "collectionId": "f66c10d7-8300-4a34-b7f3-62bb284d282f",
+    "dateExported": "2024-08-13T13:52:25.354Z",
+    "version": "1.2",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "3d949517-3bc9-4c8a-aa09-e29742a6f408",
+            "colId": "f66c10d7-8300-4a34-b7f3-62bb284d282f",
+            "containerId": "",
+            "name": "getAllUsers",
+            "url": "http://localhost/Desenvolvimento-de-Sistema-de-Abertura-de-Chamados-Equipe2/backend/api/service/UserService.php?acao=getAllUsers",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-08-13T13:36:40.423Z",
+            "modified": "2024-08-13T13:37:08.545Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "acao",
+                    "value": "getAllUsers",
+                    "isPath": false
+                }
+            ]
+        },
+        {
+            "_id": "d80133be-1a1f-48b8-9135-e488b268a00f",
+            "colId": "f66c10d7-8300-4a34-b7f3-62bb284d282f",
+            "containerId": "",
+            "name": "CreateNewUser",
+            "url": "http://localhost/Desenvolvimento-de-Sistema-de-Abertura-de-Chamados-Equipe2/backend/api/service/UserService.php?acao=CreateNewUser",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2024-08-13T13:37:31.783Z",
+            "modified": "2024-08-13T13:44:46.801Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "acao",
+                    "value": "CreateNewUser",
+                    "isPath": false
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\r\n  \"nome\": \"João Silva\",\r\n  \"email\": \"joao123@example.com\",\r\n  \"telefone\": \"12345678910\",\r\n  \"tipo\": 1,\r\n  \"password_hash\": \"senha123\"\r\n}\r\n",
+                "form": []
+            }
+        },
+        {
+            "_id": "c289205d-f749-4d04-b08d-245bcc4d1907",
+            "colId": "f66c10d7-8300-4a34-b7f3-62bb284d282f",
+            "containerId": "",
+            "name": "validacaoLogin",
+            "url": "http://localhost/Desenvolvimento-de-Sistema-de-Abertura-de-Chamados-Equipe2/backend/api/service/UserService.php?acao=validacaoLogin",
+            "method": "POST",
+            "sortNum": 50000,
+            "created": "2024-08-13T13:47:59.868Z",
+            "modified": "2024-08-13T13:48:53.972Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "acao",
+                    "value": "validacaoLogin",
+                    "isPath": false
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\r\n  \"email\": \"carlos.pereira@example.com\",\r\n  \"senha\": \"minhaSenhaSegura\"\r\n}\r\n",
+                "form": []
+            }
+        },
+        {
+            "_id": "53d394f2-593b-4859-a73e-cc579a6a26b2",
+            "colId": "f66c10d7-8300-4a34-b7f3-62bb284d282f",
+            "containerId": "",
+            "name": "GetUserById",
+            "url": "http://localhost/Desenvolvimento-de-Sistema-de-Abertura-de-Chamados-Equipe2/backend/api/service/UserService.php?acao=GetUserById&id=1",
+            "method": "GET",
+            "sortNum": 60000,
+            "created": "2024-08-13T13:51:06.932Z",
+            "modified": "2024-08-13T13:51:33.600Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "acao",
+                    "value": "GetUserById",
+                    "isPath": false
+                },
+                {
+                    "name": "id",
+                    "value": "1",
+                    "isPath": false
+                }
+            ]
+        }
+    ],
+    "ref": "UhnhGd0eMZBeDicvAmo6soKsxcoiKH2Ew_9OYxy2jYsB4yJXBhwjAbjPEprJkfr_MQO84vaILoNB10VrzRcVAg"
+}

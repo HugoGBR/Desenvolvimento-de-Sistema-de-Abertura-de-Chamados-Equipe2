@@ -41,9 +41,9 @@ class Usercontroller
         $db->bindParam(":senha", $hashedPassword);
     
         if ($db->execute()) {
-            $resposta = ["Mensagem" => "Usuário Cadastrado com Sucesso!"];
+            $resposta = ["Mensagem" => "Usuario Cadastrado com Sucesso!"];
         } else {
-            $resposta = ["Mensagem" => "Erro ao cadastrar o usuário."];
+            $resposta = ["Mensagem" => "Erro ao cadastrar o usuario."];
         }
     
         return $resposta;
@@ -89,15 +89,6 @@ class Usercontroller
         }
     }
 
-
-    private function checkUserExists(string $email) {
-        $query = "SELECT COUNT(*) FROM usuarios WHERE email = :email";
-        $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(':email', $email);
-        $stmt->execute();
-        $count = $stmt->fetchColumn();
-        return $count > 0;
-    }
     public function updateUserById(int $id){
         try {
             $user = json_decode(file_get_contents('php://input'));

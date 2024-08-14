@@ -14,7 +14,7 @@ if (isset($_REQUEST["acao"])) {
     switch ($acao) {
         case "getAllUsers":
             if ($id !== null) {
-                echo json_encode(["error" => "Ação getAllUsers não aceita um ID"]);
+                echo json_encode(["error" => "Acao getAllUsers nao aceita um ID"]);
             } else {
                 $users = $userController->getAllUsers();
                 echo json_encode($users);
@@ -23,7 +23,7 @@ if (isset($_REQUEST["acao"])) {
 
         case "CreateNewUser":
             if ($id !== null) {
-                echo json_encode(["error" => "Ação CreateNewUser não aceita um ID"]);
+                echo json_encode(["error" => "Acao CreateNewUser nao aceita um ID"]);
             } else {
                 $mensagem = $userController->CreateNewUser();
                 echo json_encode($mensagem);
@@ -35,7 +35,7 @@ if (isset($_REQUEST["acao"])) {
                 $user = $userController->getUserById($id);
                 echo json_encode($user);
             } else {
-                echo json_encode(["error" => "Ação GetUserById necessita de um ID"]);
+                echo json_encode(["error" => "Acao GetUserById necessita de um ID"]);
             }
             break;
 
@@ -49,14 +49,14 @@ if (isset($_REQUEST["acao"])) {
                 $mensagem = $userController->updateUserById($id);
                 echo $mensagem;
             } else {
-                echo json_encode(["error" => "Ação updateUserById necessita de um ID"]);
+                echo json_encode(["error" => "Acao updateUserById necessita de um ID"]);
             }
             break;
 
         default:
-            echo json_encode(["error" => "Ação não reconhecida."]);
+            echo json_encode(["error" => "Acao nao reconhecida."]);
             break;
     }
 } else {
-    echo json_encode(["error" => "Ação não especificada."]);
+    echo json_encode(["error" => "Acao nao especificada."]);
 }

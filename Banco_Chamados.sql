@@ -6,7 +6,7 @@ CREATE TABLE usuarios (
     nome VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
     telefone VARCHAR(20),
-    tipo ENUM('usuario', 'suporte') NOT NULL,
+    tipo ENUM('usuario', 'suporte', 'administrador') NOT NULL,
     senha VARCHAR(255) NOT NULL
 );
 
@@ -29,8 +29,6 @@ CREATE TABLE chamados (
     descricao TEXT NOT NULL,
     prioridade ENUM('baixa', 'media', 'alta') NOT NULL,
     status ENUM('aberto', 'em_andamento', 'resolvido', 'fechado') DEFAULT 'aberto',
-    data_abertura TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    data_fechamento date,
     tecnico_id INT,
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
     FOREIGN KEY (subcategoria_id) REFERENCES subcategorias(id),
@@ -68,5 +66,42 @@ INSERT INTO chamados (usuario_id, subcategoria_id, descricao, prioridade) VALUES
 INSERT INTO acoes_chamados (chamado_id, usuario_id, acao) VALUES 
 (1, 2, 'Chamado recebido e em análise.');
 
+
+-- Trigger para criar uma entrada na tabela acoes_chamados quando um chamado é criado
+DELIMITER //
+
+CREATE TRIGGER trg_insert_acao_chamado
+AFTER INSERT ON chamados
+FOR EACH ROW
+BEGIN
+    -- Insere uma nova ação com a descrição "Chamado criado" quando um chamado é inserido
+    INSERT INTO acoes_chamados (chamado_id, usuario_id, acao) 
+    VALUES (NEW.id, NEW.usuario_id, CONCAT('Chamado criado com status: ', NEW.status));
+END;
+
+//
+
+DELIMITER ;
+
+
+-- Trigger para registrar uma ação sempre que um chamado for atualizado (mudança de status ou técnico)
+DELIMITER //
+
+CREATE TRIGGER trg_update_acao_chamado
+AFTER UPDATE ON chamados
+FOR EACH ROW
+BEGIN
+    -- Verifica se houve mudança no status ou no técnico responsável pelo chamado
+    IF NEW.status != OLD.status OR NEW.tecnico_id != OLD.tecnico_id THEN
+        -- Insere uma nova ação com a descrição da atualização
+        INSERT INTO acoes_chamados (chamado_id, usuario_id, acao) 
+        VALUES (NEW.id, NEW.usuario_id, 
+                CONCAT('Chamado atualizado - Novo status: ', NEW.status, ', Técnico: ', NEW.tecnico_id));
+    END IF;
+END;
+
+//
+
+DELIMITER ;
 
 

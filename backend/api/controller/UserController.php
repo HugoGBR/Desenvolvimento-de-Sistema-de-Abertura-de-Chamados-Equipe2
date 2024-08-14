@@ -57,20 +57,28 @@ class Usercontroller
             return ["Mensagem" => "Erro ao decodificar os dados JSON."];
         }
     
+        // Verificar se os campos de email e senha estão presentes
+        if (empty($user->email) || empty($user->senha)) {
+            return ["Mensagem" => "Email e senha são obrigatórios."];
+        }
+    
+        // Consulta para verificar se o usuário existe com o email fornecido
         $sql = "SELECT * FROM usuarios WHERE email = :email";
         $db = $this->conn->prepare($sql);
         $db->bindParam(":email", $user->email);
         $db->execute();
         $storedUser = $db->fetch(PDO::FETCH_ASSOC);
     
+        // Verificar se o usuário foi encontrado e se a senha corresponde
         if ($storedUser && password_verify($user->senha, $storedUser['senha'])) {
-            $resposta = $storedUser;
+            // Retornar os dados do usuário, exceto a senha
+            unset($storedUser['senha']);
+            return ["status" => 1, "Mensagem" => "Login realizado com sucesso.", "usuario" => $storedUser];
         } else {
-            $resposta = ["Mensagem" => "Email ou senha inválidos."];
+            return ["status" => 0, "Mensagem" => "Email ou senha inválidos."];
         }
-    
-        return $resposta;
     }
+    
     
      
     public function getUserById(int $id)

@@ -28,7 +28,7 @@ export default function NavbarDemo() {
             </div>
             <button
                 onClick={toggleDarkMode}
-                className="fixed bottom-4 right-4 p-2 bg-gray-800 text-white rounded"
+                className="fixed bottom-4 right-4 p-2 bg-gray-400 text-white rounded"
             >
                 {isDarkMode ? 'Light Mode' : 'Dark Mode'}
             </button>

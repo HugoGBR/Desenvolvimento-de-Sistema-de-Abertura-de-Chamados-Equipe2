@@ -5,12 +5,13 @@ import {
 	Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
+import NavbarDemo from "@/components/menu"
 
 
 export default function Dashboard() {
 	return (
 		<div>
-			<div className="grid h-screen w-full ">
+			<div className="grid h-screen w-full pl-[56px]">
 				<div className="flex flex-col">
 					
 					<main className="grid flex-1 gap-4 overflow-auto justify-center items-center p-4">

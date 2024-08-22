@@ -13,7 +13,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 export default function Home() {
   return (
   <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-    <form action="">
+    <form>
       <Card style={{ width: "400px", height: "600px" }}>
         <CardHeader>
           <CardTitle style={{textAlign: "center"}}>Cadastro Usuario</CardTitle>

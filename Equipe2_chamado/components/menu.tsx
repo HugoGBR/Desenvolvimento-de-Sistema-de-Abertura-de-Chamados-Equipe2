@@ -47,21 +47,9 @@ function Navbar({ className }: { className?: string }) {
                         <HoveredLink href="/routes/categoria">Categoria</HoveredLink>
                     </div>
                 </MenuItem>
-                <MenuItem setActive={setActive} active={active} item="Chamados">
-                    <div className="flex flex-col space-y-4 text-sm">
-                        <HoveredLink href="/routes/chamados">Chamados</HoveredLink>
-                    </div>
-                </MenuItem>
-                <MenuItem setActive={setActive} active={active} item="Resolver chamados">
-                    <div className="flex flex-col space-y-4 text-sm">
-                        <HoveredLink href="/routes/resolverChamado">Resolver</HoveredLink>
-                    </div>
-                </MenuItem>
-                <MenuItem setActive={setActive} active={active} item="Historico">
-                    <div className="flex flex-col space-y-4 text-sm">
-                        <HoveredLink href="/routes/historico">Historico</HoveredLink>
-                    </div>
-                </MenuItem>
+                <HoveredLink href="/routes/chamados">Chamados</HoveredLink>
+                <HoveredLink href="/routes/resolverChamado">Resolver Chamado</HoveredLink>       
+                <HoveredLink href="/routes/historico">Historico</HoveredLink>
             </Menu>
         </div>
     );

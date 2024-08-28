@@ -27,7 +27,7 @@ export default function Home() {
             <CardContent>
               <div style={{ marginTop: "40px" }}>
                 {/* Adicionando a imagem com link */}
-                <Link href="/outra-tela">
+                <Link href={'/routes/categoria/CadastroCategoria'}>
                   <img 
                     src="Equipe2_chamado/public/adicionar (1).png" 
                     alt="Descrição da imagem" 

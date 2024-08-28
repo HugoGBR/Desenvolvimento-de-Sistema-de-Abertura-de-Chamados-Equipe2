@@ -52,32 +52,23 @@ class Usercontroller
     public function validacaoLogin()
     {
         $user = json_decode(file_get_contents("php://input"));
-    
-        if ($user === null) {
-            return ["Mensagem" => "Erro ao decodificar os dados JSON."];
-        }
-    
-        // Verificar se os campos de email e senha estão presentes
-        if (empty($user->email) || empty($user->senha)) {
-            return ["Mensagem" => "Email e senha são obrigatórios."];
-        }
-    
-        // Consulta para verificar se o usuário existe com o email fornecido
-        $sql = "SELECT * FROM usuarios WHERE email = :email";
+        $sql = "SELECT * FROM usuarios WHERE email = :email AND senha = :senha";
         $db = $this->conn->prepare($sql);
         $db->bindParam(":email", $user->email);
+        $db->bindParam(":senha", $user->senha);
         $db->execute();
-        $storedUser = $db->fetch(PDO::FETCH_ASSOC);
-    
-        // Verificar se o usuário foi encontrado e se a senha corresponde
-        if ($storedUser && password_verify($user->senha, $storedUser['senha'])) {
-            // Retornar os dados do usuário, exceto a senha
-            unset($storedUser['senha']);
-            return ["status" => 1, "Mensagem" => "Login realizado com sucesso.", "usuario" => $storedUser];
-        } else {
-            return ["status" => 0, "Mensagem" => "Email ou senha inválidos."];
+        $users = $db->fetchAll(PDO::FETCH_ASSOC);
+
+
+        if ($users) {
+            $resposta = $users;
+        }else{
+            $resposta = 0;
         }
+
+        return $resposta;
     }
+     
     
     
      

@@ -35,7 +35,7 @@ export function DataTable<TData, TValue>({
   })
 
   return (
-    <div className="rounded-md border">
+    <div className="mt-20 rounded-md border">
        <div className="p-4 border-b">
         <h2 className="text-xl font-semibold text-center ">Histórico de chamados</h2> 
       </div>

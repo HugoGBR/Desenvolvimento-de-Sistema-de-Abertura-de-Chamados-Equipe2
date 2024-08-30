@@ -28,17 +28,13 @@ class Usercontroller
             return ["Mensagem" => "Erro ao decodificar os dados JSON."];
         }
     
-        // Hash da senha
-        $hashedPassword = password_hash($user->senha, PASSWORD_BCRYPT);
-    
-        // Insira os dados no banco de dados
         $sql = "INSERT INTO usuarios (nome, email, telefone, tipo, senha) VALUES (:nome, :email, :telefone, :tipo, :senha)";
         $db = $this->conn->prepare($sql);
         $db->bindParam(":nome", $user->nome);
         $db->bindParam(":email", $user->email);
         $db->bindParam(":telefone", $user->telefone);
         $db->bindParam(":tipo", $user->tipo);
-        $db->bindParam(":senha", $hashedPassword);
+        $db->bindParam(":senha", $user->senha);
     
         if ($db->execute()) {
             $resposta = ["Mensagem" => "Usuario Cadastrado com Sucesso!"];

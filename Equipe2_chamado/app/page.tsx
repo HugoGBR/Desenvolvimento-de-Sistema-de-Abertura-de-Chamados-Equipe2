@@ -36,7 +36,7 @@ export default function LoginForm() {
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-      <Card className="w-full max-w-sm">
+      <Card className="w-full border-2 border-gray-400 shadow-xl shadow-blue-800 rounded-2xl max-w-sm">
         <form onSubmit={handleSubmit(handleFormSubmit)}>
           <CardHeader>
             <CardTitle className="text-2xl">Login</CardTitle>

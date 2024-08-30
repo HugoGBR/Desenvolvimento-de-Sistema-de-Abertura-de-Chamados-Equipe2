@@ -29,7 +29,7 @@ export default function Dashboard() {
 											<div className="p-1">
 												<Card>
 													<CardContent className="flex aspect-square items-center justify-center p-6">
-														<form className="grid items-start rounded-3xl shadow-xl shadow-blue-800 border-2 border-gray-400 p-10 gap-6">
+														<form className="grid items-start rounded-2xl shadow-xl shadow-blue-800 border-2 border-gray-400 p-10 gap-6">
 															<div className="grid gap-3">
 																<div className="text-center font-bold text-2xl pb-6">Resolver Chamado</div>
 																<Select>

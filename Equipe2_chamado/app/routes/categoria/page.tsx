@@ -4,6 +4,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { HoveredLink, Menu, MenuItem, ProductItem } from "@/components/ui/navbar-menu";
 import {
   Table,
   TableBody,
@@ -26,14 +27,7 @@ export default function Home() {
             
             <CardContent>
               <div style={{ marginTop: "40px" }}>
-                {/* Adicionando a imagem com link */}
-                <Link href={'/routes/categoria/CadastroCategoria'}>
-                  <img 
-                    src="Equipe2_chamado/public/adicionar (1).png" 
-                    alt="Descrição da imagem" 
-                    style={{ width: "100%", height: "auto", marginBottom: "20px", cursor: "pointer" }} 
-                  />
-                </Link>
+              <HoveredLink href="/routes/categoria/CadastroCategoria">Chamados</HoveredLink>
 
                 <input
                   type="text"
@@ -55,29 +49,7 @@ export default function Home() {
               </div>
             </CardContent>
           </Card>
-
-          {/* Segunda tabela */}
-          <Card style={{ width: "250px", height: "500px" }}>
-            <CardHeader>
-              <CardTitle style={{ textAlign: "center" }}>Categoria</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div style={{ marginTop: "40px" }}>
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead className="w-[100px]" style={{ textAlign: "center" }}>Outra Coluna</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    <TableRow>
-                      <TableCell className="font-medium" style={{ textAlign: "center" }}>outro dado</TableCell>
-                    </TableRow>
-                  </TableBody>
-                </Table>
-              </div>
-            </CardContent>
-          </Card>
+          
         </div>
       </form>
     </div>

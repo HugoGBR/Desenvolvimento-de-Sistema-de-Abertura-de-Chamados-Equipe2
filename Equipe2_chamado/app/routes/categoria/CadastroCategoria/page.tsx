@@ -1,48 +1,102 @@
-'use client'
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
+"use client";
+import { descricaoSchema } from "@/app/schemas/categoriaschema";
 import {
-    CardFooter,
-  } from "@/components/ui/card";
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { createNewCategoria } from "@/lib/CategoriaController";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
-export default function Dashboard() {
-	return (
-		<div>
-			<div className="grid h-screen w-full">
-				<div className="flex flex-col">
-					<main className="grid flex-1 gap-4 overflow-auto justify-center items-center p-4">
-						<div className="flex-col items-start gap-8 md:flex" x-chunk="dashboard-03-chunk-0">
-							<form className="grid w-full items-start rounded-2xl shadow-xl shadow-blue-800 border-2 border-gray-400 p-10 gap-6">
+type LoginFormSchema = z.infer<typeof descricaoSchema>;
 
-								<div className="grid gap-3">
-									<div className="text-center font-bold text-2xl pb-6">Cadastro Categoria</div>
-								</div>
-								<div className="grid gap-3">
-									<Label htmlFor="usuario">Nome Categoria</Label>
-									<Input id="usuario" type="text" placeholder="Aqui vai aparecer o nome do autor do chamado" />
-								</div>
-								<div className="grid gap-3">
-									<Label htmlFor="content">Descrição</Label>
-									<Textarea
-										id="content"
-										placeholder="Aqui vai aparecer a descrição do problema relatado pelo usuário"
-										className="min-h-[9.5rem]"
-									/>
-								</div>
-                                <CardFooter className="justify-center flex">
+export default function Home() {
+  const route = useRouter();
+
+  const { register, handleSubmit, formState: { errors }, setValue } = useForm<LoginFormSchema>({
+    resolver: zodResolver(descricaoSchema)
+  });
+
+  const handleFormSubmit = async (data: LoginFormSchema) => {
+    const { nome, descricao, tipo } = data;
+
+    try {
+      const response = await createNewCategoria(nome, descricao,tipo);
+      if (response && response.id) {
+        alert('Usuário cadastrado com sucesso!');
+        route.push("/routes/cadastros");
+      } else {
+        throw new Error('Erro ao cadastrar o usuário.');
+      }
+    } catch (error) {
+      console.error(error);
+      alert('Erro ao cadastrar o usuário. Por favor, tente novamente.');
+    }
+  };
+
+  return (
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+      <form className="rounded-2xl shadow-xl shadow-blue-800 border-2 border-gray-400 p-10 gap-6" onSubmit={handleSubmit(handleFormSubmit)}>
+        <Card style={{ width: "400px", height: "600px" }}>
+          <CardHeader>
+            <CardTitle style={{ textAlign: "center" }}>Cadastro Usuário</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div style={{ marginTop: "40px" }}>
+              <Label htmlFor="nome">Nome</Label>
+              <input
+                id="nome"
+                type="text"
+                placeholder="Nome Categoria"
+                {...register('nome')}
+                style={{ padding: "8px", width: "100%", border: "2px solid #ccc", borderRadius: "4px", marginBottom: "20px" }}
+              />
+              {errors.nome && <div style={{ color: "red" }}>{errors.nome.message}</div>}
+
+              <Label htmlFor="descricao">Descrição</Label>
+              <input
+                id="descricao"
+                type="text"
+                placeholder=""
+				className="min-h-[9.5rem]"
+                {...register('descricao')}
+                style={{ padding: "8px", width: "100%", border: "2px solid #ccc", borderRadius: "4px", marginBottom: "20px" }}
+              />
+              {errors.descricao && <div style={{ color: "red" }}>{errors.descricao.message}</div>}
+
+              <h2>Categoria</h2>
+              <RadioGroup defaultValue="usuario" style={{ display: 'flex', justifyContent: 'space-around', marginTop: '10px' }}>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value='usuario' id="1" {...register('tipo')} />
+                  <Label htmlFor="1">Categoria</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value='suporte' id="2" {...register('tipo')} />
+                  <Label htmlFor="2">Sub Categoria</Label>
+                </div>
+              </RadioGroup>
+              {errors.tipo && <div style={{ color: "red" }}>{errors.tipo.message}</div>}
+            </div>
+          </CardContent>
+          <div style={{ marginTop: "40px" }}>
+            <CardFooter className="justify-center flex">
               <button
                 type="submit"
                 style={{ padding: "8px 16px", backgroundColor: "#007bff", color: "#fff", border: "none", borderRadius: "4px" }}>
                 Cadastrar
               </button>
             </CardFooter>
-							</form>
-						</div>
-					</main>
-				</div>
-			</div>
-		</div>
-
-	)
+          </div>
+        </Card>
+      </form>
+    </div>
+  );
 }

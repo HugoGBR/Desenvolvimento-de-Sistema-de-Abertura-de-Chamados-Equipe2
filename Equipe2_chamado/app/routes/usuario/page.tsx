@@ -46,7 +46,7 @@ export default function Home() {
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-      <form onSubmit={handleSubmit(handleFormSubmit)}>
+      <form className=" rounded-2xl shadow-xl shadow-blue-800 border-2 border-gray-400 p-10 gap-6" onSubmit={handleSubmit(handleFormSubmit)}>
         <Card style={{ width: "400px", height: "600px" }}>
           <CardHeader>
             <CardTitle style={{ textAlign: "center" }}>Cadastro Usuário</CardTitle>

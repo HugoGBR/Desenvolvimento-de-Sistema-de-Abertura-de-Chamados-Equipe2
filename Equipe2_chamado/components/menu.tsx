@@ -5,8 +5,9 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
 export default function NavbarDemo() {
-    const [isDarkMode, setIsDarkMode] = useState(false);
+    const [isDarkMode, setIsDarkMode] = useState(true);
     const pathname = usePathname();
+
     useEffect(() => {
         if (isDarkMode) {
             document.documentElement.classList.add('dark');
@@ -18,21 +19,30 @@ export default function NavbarDemo() {
     const toggleDarkMode = () => {
         setIsDarkMode(!isDarkMode);
     };
+
     if (pathname === '/') {
-        return null;
+        return null; 
     }
 
     return (
         <div>
+            
+            <button
+                onClick={toggleDarkMode}
+                className="fixed bottom-4 right-4  p-2 border-solid border-2 text-white rounded-xl"
+            >
+                {isDarkMode ? 'Light Mode' : 'Dark Mode'}
+                
+            </button>
             <div className="relative w-full flex items-center justify-center">
                 <Navbar className="top-2" />
             </div>
-            <button
-                onClick={toggleDarkMode}
-                className="fixed bottom-4 right-4 p-2 bg-gray-400 text-white rounded"
-            >
-                {isDarkMode ? 'Light Mode' : 'Dark Mode'}
+            <button className="fixed bottom-4 left-4 p-2 border-solid border-2 text-white rounded-xl">
+                
+                <HoveredLink href="/">⠀Sair⠀</HoveredLink>
             </button>
+            
+
         </div>
     );
 }

@@ -1,4 +1,5 @@
 'use client'
+import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import {
@@ -14,13 +15,13 @@ export default function Dashboard() {
 				<div className="flex flex-col">
 					<main className="grid flex-1 gap-4 overflow-auto justify-center items-center p-4">
 						<div className="flex-col items-start gap-8 md:flex" x-chunk="dashboard-03-chunk-0">
-							<form className="grid w-full items-start rounded-2xl shadow-xl shadow-blue-800 border-2 border-gray-400 p-10 gap-6">
+							<form className="grid w-[800px] items-start rounded-2xl shadow-xl shadow-blue-800 border-2 border-gray-400 p-10 gap-6">
 
 								<div className="grid gap-3">
 									<div className="text-center font-bold text-2xl pb-6">Chamados</div>
 									<Select>
 										<Label htmlFor="role">Categoria</Label>
-										<Select defaultValue="system">
+										<Select>
 											<SelectTrigger>
 												<SelectValue placeholder="Selecione a categoria" />
 											</SelectTrigger>
@@ -29,7 +30,7 @@ export default function Dashboard() {
 											</SelectContent>
 										</Select>
 										<Label htmlFor="role">Subcategoria</Label>
-										<Select defaultValue="system">
+										<Select>
 											<SelectTrigger>
 												<SelectValue placeholder="Selecione a subcategoria" />
 											</SelectTrigger>
@@ -58,7 +59,7 @@ export default function Dashboard() {
 											<SelectItem value="quantum">
 												<div className="flex items-start gap-3 text-muted-foreground">
 													<div className="grid gap-0.5">
-													</div>
+													</div>	
 												</div>
 											</SelectItem>
 										</SelectContent>
@@ -69,10 +70,9 @@ export default function Dashboard() {
 									<Input id="usuario" type="text" placeholder="Nome do autor do chamado" />
 								</div>
 								<div className="grid gap-4">
-									
-									<div className="grid gap-3 w-72">
+									<div className="grid gap-3 w-auto">
 										<Label htmlFor="prioridade">Prioridade</Label>
-										<Select defaultValue="system">
+										<Select>
 											<SelectTrigger>
 												<SelectValue placeholder="Selecione a prioridade" />
 											</SelectTrigger>
@@ -93,7 +93,9 @@ export default function Dashboard() {
 									/>
 								</div>
 								<div className="justify-center flex pt-2">
-									<button className="">Cadastro</button>
+									<Button type="submit" style={{ padding: "8px 16px", color: "#fff", border: "none", borderRadius: "4px" }} className="w-full bg-blue-700">
+										Cadastre
+									</Button>
 								</div>
 							</form>
 						</div>

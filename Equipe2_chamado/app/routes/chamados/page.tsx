@@ -66,16 +66,22 @@ export default function Dashboard() {
 								</div>
 								<div className="grid gap-3">
 									<Label htmlFor="usuario">Usuário</Label>
-									<Input id="usuario" type="text" placeholder="Aqui vai aparecer o nome do autor do chamado" />
+									<Input id="usuario" type="text" placeholder="Nome do autor do chamado" />
 								</div>
-								<div className="grid grid-cols-2 gap-4">
-									<div className="grid gap-3">
-										<Label htmlFor="status">Status</Label>
-										<Input id="status" type="text" placeholder='Aberto/Em andamento/Resolvido/Fechado' />
-									</div>
-									<div className="grid gap-3">
+								<div className="grid gap-4">
+									
+									<div className="grid gap-3 w-72">
 										<Label htmlFor="prioridade">Prioridade</Label>
-										<Input id="prioridade" type="text" placeholder="Baixa/ Média/ Alta" />
+										<Select defaultValue="system">
+											<SelectTrigger>
+												<SelectValue placeholder="Selecione a prioridade" />
+											</SelectTrigger>
+											<SelectContent>
+												<SelectItem value="Baixa">Baixa</SelectItem>{/*supostos nomes usar para puxar as categorias que cadastrarem no banco */}
+												<SelectItem value="Média">Média</SelectItem>
+												<SelectItem value="Alta">Alta</SelectItem>
+											</SelectContent>
+										</Select>
 									</div>
 								</div>
 								<div className="grid gap-3">
@@ -85,6 +91,9 @@ export default function Dashboard() {
 										placeholder="Aqui vai aparecer a descrição do problema relatado pelo usuário"
 										className="min-h-[9.5rem]"
 									/>
+								</div>
+								<div className="justify-center flex pt-2">
+									<button className="">Cadastro</button>
 								</div>
 							</form>
 						</div>

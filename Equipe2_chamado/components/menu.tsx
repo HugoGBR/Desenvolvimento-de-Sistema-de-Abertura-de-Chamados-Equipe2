@@ -2,11 +2,11 @@
 import { cn } from "@/lib/utils";
 import { HoveredLink, Menu, MenuItem, ProductItem } from "@/components/ui/navbar-menu";
 import { useEffect, useState } from "react";
-
+import { usePathname } from "next/navigation";
 
 export default function NavbarDemo() {
     const [isDarkMode, setIsDarkMode] = useState(false);
-
+    const pathname = usePathname();
     useEffect(() => {
         if (isDarkMode) {
             document.documentElement.classList.add('dark');
@@ -18,6 +18,9 @@ export default function NavbarDemo() {
     const toggleDarkMode = () => {
         setIsDarkMode(!isDarkMode);
     };
+    if (pathname === '/') {
+        return null;
+    }
 
     return (
         <div>

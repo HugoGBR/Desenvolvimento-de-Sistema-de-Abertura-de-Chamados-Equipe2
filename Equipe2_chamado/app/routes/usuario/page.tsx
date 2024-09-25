@@ -65,7 +65,7 @@ export default function Home() {
                 type="text"
                 placeholder="Email"
                 {...register('email')}
-                style={{ padding: "8px", width: "100%", border: "2px solid #ccc", borderRadius: "4px", marginBottom: "20px" }}
+                style={{ padding: "8px", width: "100%", opacity: 10, border: "2px solid #ccc", borderRadius: "4px", marginBottom: "20px" }}
               />
               {errors.email && <div style={{ color: "red" }}>{errors.email.message}</div>}
 

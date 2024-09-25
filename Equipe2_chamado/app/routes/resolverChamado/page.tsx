@@ -13,9 +13,16 @@ import {
 	CarouselNext,
 	CarouselPrevious,
 } from "@/components/ui/carousel"
+import { Button } from "@/components/ui/button"
+import { useToast } from "@/hooks/use-toast"
+
+
+
 
 
 export default function Dashboard() {
+	const { toast } = useToast()
+
 	return (
 		<div>
 			<div className="grid h-screen w-full text-4xl font-semibold">
@@ -34,7 +41,7 @@ export default function Dashboard() {
 																<div className="text-center font-bold text-2xl pb-6">Resolver Chamado</div>
 																<Select>
 																	<Label htmlFor="role">Categoria</Label>
-																	<Select defaultValue="system">
+																	<Select>
 																		<SelectTrigger>
 																			<SelectValue placeholder="Selecione a categoria" />
 																		</SelectTrigger>
@@ -43,7 +50,7 @@ export default function Dashboard() {
 																		</SelectContent>
 																	</Select>
 																	<Label htmlFor="role">Subcategoria</Label>
-																	<Select defaultValue="system">
+																	<Select>
 																		<SelectTrigger>
 																			<SelectValue placeholder="Selecione a subcategoria" />
 																		</SelectTrigger>
@@ -85,11 +92,30 @@ export default function Dashboard() {
 															<div className="grid grid-cols-2 gap-4">
 																<div className="grid gap-3">
 																	<Label htmlFor="status">Status</Label>
-																	<Input id="status" type="text" placeholder='Aberto/Em andamento/Resolvido/Fechado' />
+																<Select>
+																	<SelectTrigger >
+																		<SelectValue className="text-opacity-50" placeholder="Selecione o status" />
+																	</SelectTrigger>
+																	<SelectContent >
+																		<SelectItem value="Aberto">Aberto</SelectItem>{/*supostos nomes usar para puxar as categorias que cadastrarem no banco */}
+																		<SelectItem value="Em-andamento">Em andamento</SelectItem>
+																		<SelectItem value="Resolvido">Resolvido</SelectItem>
+																		<SelectItem value="Fechado">Fechado</SelectItem>
+																	</SelectContent>
+																</Select>
 																</div>
 																<div className="grid gap-3">
-																	<Label htmlFor="prioridade">Prioridade</Label>
-																	<Input id="prioridade" type="text" placeholder="Baixa/ Média/ Alta" />
+																	<Label htmlFor="status">Prioridade</Label>
+																	<Select>
+																		<SelectTrigger >
+																			<SelectValue placeholder="Selecione a prioridade" />
+																		</SelectTrigger>
+																		<SelectContent >
+																			<SelectItem value="baixa">Baixa</SelectItem>{/*supostos nomes usar para puxar as categorias que cadastrarem no banco */}
+																			<SelectItem value="media">Média</SelectItem>
+																			<SelectItem value="alta">Alta</SelectItem>
+																		</SelectContent>
+																	</Select>
 																</div>
 															</div>
 															<div className="grid gap-3">
@@ -100,6 +126,18 @@ export default function Dashboard() {
 																	className="min-h-[9.5rem]"
 																/>
 															</div>
+
+															<Button className="bg-blue-700 shadow-md hover:bg-white hover:text-black shadow-blue-500 text-gray-50" type="button"
+																variant="outline"
+																onClick={() => {
+																	toast({
+																		description: "Chamado Finalizado",
+																	})
+																}}
+															>
+																Finalizar
+															</Button>
+
 														</form>
 													</CardContent>
 												</Card>

@@ -93,7 +93,7 @@ export default function Dashboard() {
 									/>
 								</div>
 								<div className="justify-center flex pt-2">
-									<Button type="submit" style={{ padding: "8px 16px", color: "#fff", border: "none", borderRadius: "4px" }} className="w-full bg-blue-700">
+									<Button type="submit"className="w-full bg-blue-700 shadow-md hover:bg-white hover:text-black shadow-blue-500 text-gray-50">
 										Cadastre
 									</Button>
 								</div>

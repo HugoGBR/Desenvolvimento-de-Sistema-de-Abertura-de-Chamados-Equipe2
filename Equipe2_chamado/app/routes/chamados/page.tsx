@@ -26,7 +26,7 @@ export default function Dashboard() {
 												<SelectValue placeholder="Selecione a categoria" />
 											</SelectTrigger>
 											<SelectContent>
-												<SelectItem value="system">Sistema de gerenciamento de Comissões</SelectItem>{/*supostos nomes usar para puxar as categorias que cadastrarem no banco */}
+												<SelectItem value="system">Sistema de gerenciamento de Comissões</SelectItem>
 											</SelectContent>
 										</Select>
 										<Label htmlFor="role">Subcategoria</Label>
@@ -35,7 +35,7 @@ export default function Dashboard() {
 												<SelectValue placeholder="Selecione a subcategoria" />
 											</SelectTrigger>
 											<SelectContent>
-												<SelectItem value="home">Home</SelectItem>{/*supostos nomes usar para puxar as categorias que cadastrarem no banco */}
+												<SelectItem value="home">Home</SelectItem>
 												<SelectItem value="cadastro">Cadastro</SelectItem>
 												<SelectItem value="relatorio">Relatório</SelectItem>
 												<SelectItem value="financeiro">Financeiro</SelectItem>
@@ -77,7 +77,7 @@ export default function Dashboard() {
 												<SelectValue placeholder="Selecione a prioridade" />
 											</SelectTrigger>
 											<SelectContent>
-												<SelectItem value="Baixa">Baixa</SelectItem>{/*supostos nomes usar para puxar as categorias que cadastrarem no banco */}
+												<SelectItem value="Baixa">Baixa</SelectItem>
 												<SelectItem value="Média">Média</SelectItem>
 												<SelectItem value="Alta">Alta</SelectItem>
 											</SelectContent>

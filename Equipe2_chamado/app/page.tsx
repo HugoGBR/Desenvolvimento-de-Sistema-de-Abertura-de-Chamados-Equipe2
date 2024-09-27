@@ -50,7 +50,7 @@ export default function LoginForm() {
               <Input 
                 id="email" 
                 type="email" 
-                placeholder="m@example.com" 
+                placeholder="Digite seu email" 
                 {...register("user")} 
               />
               {errors.user && <span style={{ color: 'red' }}>{errors.user.message}</span>}
@@ -60,7 +60,7 @@ export default function LoginForm() {
               <Input 
                 id="password" 
                 type="password" 
-                placeholder="Senha" 
+                placeholder="Digite sua senha" 
                 {...register("password")} 
               />
               {errors.password && <span style={{ color: 'red' }}>{errors.password.message}</span>}

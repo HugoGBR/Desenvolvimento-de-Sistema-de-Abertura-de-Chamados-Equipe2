@@ -2,23 +2,30 @@ import { backendURL } from "./URLS/backurl";
 import { criarCookie } from "./coockier";
 
 export async function createNewCategoria(
-  newNome: string,
-  newDescricao: string,
-  newTipo: string
+  newNome: string
 ) {
-  const request = await fetch(`${backendURL()}/CategoriaService.php?acao=CreateNewCategoria`, // Endpoint alterado
-    {
+  try {
+    const request = await fetch(`${backendURL()}/CategoriaService.php?acao=CreateNewCategoria`, {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json"  // Definir o Content-Type
+      },
       body: JSON.stringify({
-        nome: newNome,
-        descricao: newDescricao,  // Correção aqui
-        tipo: newTipo
+        nome: newNome
       }),
     });
 
-  const response = await request.json();
-  console.log(response);
-  return response;
+    if (!request.ok) {
+      throw new Error(`Erro: ${request.status} - ${request.statusText}`);
+    }
+
+    const response = await request.json();
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.error("Erro ao cadastrar a categoria:", error);
+    throw error;  // Lança o erro para ser tratado onde o método é chamado
+  }
 }
 export async function updateClientByID(newNome: string, newEmail: string, newTelefone: string, newSenha: string, paramsId: number) {
   const request = await fetch(`${backendURL()}/ClienteService.php?acao=updateClientByID&id=${paramsId}`, {

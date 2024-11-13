@@ -20,15 +20,6 @@ export default function Dashboard() {
 								<div className="grid gap-3">
 									<div className="text-center font-bold text-2xl pb-6">Chamados</div>
 									<Select>
-										<Label htmlFor="role">Categoria</Label>
-										<Select>
-											<SelectTrigger>
-												<SelectValue placeholder="Selecione a categoria" />
-											</SelectTrigger>
-											<SelectContent>
-												<SelectItem value="system">Sistema de gerenciamento de Comissões</SelectItem>
-											</SelectContent>
-										</Select>
 										<Label htmlFor="role">Subcategoria</Label>
 										<Select>
 											<SelectTrigger>

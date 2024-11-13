@@ -29,7 +29,7 @@ CREATE TABLE chamados (
     descricao TEXT NOT NULL,
     prioridade ENUM('baixa', 'media', 'alta') NOT NULL,
     status ENUM('aberto', 'em_andamento', 'resolvido', 'fechado') DEFAULT 'aberto',
-    tecnico_id INT,
+    tecnico_id INT default null,
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
     FOREIGN KEY (subcategoria_id) REFERENCES subcategorias(id),
     FOREIGN KEY (tecnico_id) REFERENCES usuarios(id)

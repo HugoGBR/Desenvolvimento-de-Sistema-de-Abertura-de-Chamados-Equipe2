@@ -58,6 +58,7 @@ function Navbar({ className }: { className?: string }) {
                     <div className="flex flex-col space-y-4 text-sm">
                         <HoveredLink href="/routes/usuario/id">Usuarios</HoveredLink>
                         <HoveredLink href="/routes/categoria/CadastroCategoria">Categoria</HoveredLink>
+                        <HoveredLink href="/routes/categoria/CadastroSubCategoria">SubCategoria</HoveredLink>
                     </div>
                 </MenuItem>
                 <HoveredLink href="/routes/chamados">Chamados</HoveredLink>
